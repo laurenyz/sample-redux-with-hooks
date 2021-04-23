@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addPost } from '../redux/actions'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function NewPostForm() {
     const [text, setText] = useState("")
+    const dispatch = useDispatch()
 
     const handleOnSubmit = event => {
         event.preventDefault()
-        console.log(text)
+        dispatch(addPost({ text: text, id: uuidv4() }))
+        setText("")
     }
 
     return (
